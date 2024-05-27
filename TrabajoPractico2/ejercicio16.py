@@ -10,7 +10,7 @@
 # e. mostrar todas las naves que comienzan con AT;
 # f. listar todas las naves que pueden llevar seis o más pasajeros;
 # g. mostrar toda la información de la nave más pequeña y la más grande.
-from TrabajoPractico2.pila import Stack
+from pila import Stack
 class Nave:
     def __init__(self, nombre, largo, tripulacion, pasajeros):
         self.nombre = nombre
@@ -68,34 +68,44 @@ def info_naves_extremas(naves):
 
 # Uso de funciones.
 naves_ordenadas = ordenar_naves(naves)
-print("a. Listado ordenado por nombre de las naves de manera ascendente y por largo de las mismas de manera descendente:")
+print("Listado ordenado por nombre (ascendente) y por largo (descendente):")
 for nave in naves_ordenadas:
     print(nave)
 
-print("\nb. Información del Halcón Milenario y la Estrella de la Muerte:")
+print ("-------------------------------------------------")
+
+print("\n Información del Halcón Milenario y la Estrella de la Muerte:")
 info_naves_especificas(naves)
 
-print("\nc. Las cinco naves con mayor cantidad de pasajeros:")
+print ("-------------------------------------------------")
+
+print("\n Las cinco naves con mayor cantidad de pasajeros:")
 cinco_naves = cinco_naves_mas_pasajeros(naves)
 for nave in cinco_naves:
     print(nave)
 
-print("\nd. La nave que requiere mayor cantidad de tripulación:")
+print ("-------------------------------------------------")
+
+print("\nLa nave que requiere mayor cantidad de tripulación:")
 print(nave_mayor_tripulacion(naves))
 
-print("\ne. Naves que comienzan con 'AT':")
+print ("-------------------------------------------------")
+
+print("\nNaves que comienzan con 'AT':")
 naves_AT = naves_con_prefijo(naves, "AT")
 for nave in naves_AT:
     print(nave)
 
-print("\nf. Naves que pueden llevar seis o más pasajeros:")
+print ("-------------------------------------------------")
+
+print("\nNaves que pueden llevar seis o más pasajeros:")
 naves_seis_pasajeros = naves_con_mas_pasajeros(naves, 6)
 for nave in naves_seis_pasajeros:
     print(nave)
 
-print("\ng. Nave mas pequeña y la más grande:")
-nave_mas_pequenia, nave_mas_grande = info_naves_extremas(naves)
-print("Nave más pequeña:")
-print(nave_mas_pequenia)
-print("\nNave más grande:")
-print(nave_mas_grande)
+# print("\ng. Nave mas pequeña y la más grande:")
+# nave_mas_pequenia, nave_mas_grande = info_naves_extremas(naves)
+# print("Nave más pequeña:")
+# print(nave_mas_pequenia)
+# print("\nNave más grande:")
+# print(nave_mas_grande)
