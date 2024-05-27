@@ -54,7 +54,7 @@ def nave_mayor_tripulacion(naves):
     return max(naves, key=lambda x: x.tripulacion)
 
 # Mostrar todas las naves que comienzan con "AT"
-def naves_con_prefijo(naves, prefijo):
+def naves_con_AT(naves, prefijo):
     return [nave for nave in naves if nave.nombre.startswith(prefijo)]
 
 # Lista de todas las naves que pueden llevar seis o mas pasajeros
@@ -62,7 +62,7 @@ def naves_con_mas_pasajeros(naves, cantidad_pasajeros):
     return [nave for nave in naves if nave.pasajeros >= cantidad_pasajeros]
 
 # Mostrar toda la informacion de la nave más pequenia y la mas grande
-def info_naves_extremas(naves):
+def naves_grandes_y_pequenias (naves):
     naves.sort(key=lambda x: x.largo)  # Ordenar por largo ascendente
     return naves[0], naves[-1]
 
@@ -92,7 +92,7 @@ print(nave_mayor_tripulacion(naves))
 print ("-------------------------------------------------")
 
 print("\nNaves que comienzan con 'AT':")
-naves_AT = naves_con_prefijo(naves, "AT")
+naves_AT = naves_con_AT(naves, "AT")
 for nave in naves_AT:
     print(nave)
 
@@ -103,9 +103,9 @@ naves_seis_pasajeros = naves_con_mas_pasajeros(naves, 6)
 for nave in naves_seis_pasajeros:
     print(nave)
 
-# print("\ng. Nave mas pequeña y la más grande:")
-# nave_mas_pequenia, nave_mas_grande = info_naves_extremas(naves)
-# print("Nave más pequeña:")
-# print(nave_mas_pequenia)
-# print("\nNave más grande:")
-# print(nave_mas_grande)
+print("\ng. Nave mas pequeña y la más grande:")
+nave_mas_pequenia, nave_mas_grande = naves_grandes_y_pequenias(naves)
+print("Nave más pequeña:", nave_mas_pequenia)
+
+print("\nNave más grande:", nave_mas_grande)
+
