@@ -39,7 +39,7 @@ def ordenar_naves(naves):
     naves.sort(key=lambda x: x.largo, reverse=True)  # Ordenar por largo descendente
     return naves
 
-# Mostrar toda la información del "Halcón Milenario" y la "Estrella de la Muerte"
+# Mostrar toda la informacion del "Halcón Milenario" y la "Estrella de la Muerte"
 def info_naves_especificas(naves):
     for nave in naves:
         if nave.nombre == "Halcón Milenario" or nave.nombre == "Estrella de la Muerte":
