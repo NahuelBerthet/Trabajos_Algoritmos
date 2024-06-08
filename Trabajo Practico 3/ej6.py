@@ -137,7 +137,7 @@ super_heroes = [
     "nombre": "Ant-Man",
     "año_aparicion": 1962,
     "casa_comic": "Marvel Comics",
-    "biografia": "Hanbiografiak Pym o Scott Lang, héroes capaces de cambiar de tamaño y comunicarse con insectos. Usa un traje que lo hace pequeño."
+    "biografia": "Hank Pym o Scott Lang, héroes capaces de cambiar de tamaño y comunicarse con insectos. Usa un traje que lo hace pequeño."
   }
 ]
 
