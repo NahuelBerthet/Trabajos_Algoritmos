@@ -172,7 +172,7 @@ for i in range(len(super_heroes)):
     if 'traje' in super_heroes[i]['biografia'] or 'armadura' in super_heroes[i]['biografia']:
         print(i, super_heroes[i]['nombre'], super_heroes[i]['biografia'])
 
-#f.Heroes previos a 1963
+#e.Heroes previos a 1963
 heroe_previo_1963 = []
 for heroe in super_heroes:
     if heroe["año_aparicion"] < 1963:
@@ -182,7 +182,7 @@ for heroe in heroe_previo_1963:
     print(heroe["nombre"])
     break
 
-#g.Mostrar casa Capitana Marvel, Mujer Maravilla
+#f.Mostrar casa Capitana Marvel, Mujer Maravilla
 for heroe in super_heroes:
     if heroe["nombre"] == "Capitana Marvel":
         print("---------Casa Capitana Marvel----------")
@@ -194,15 +194,27 @@ for heroe in super_heroes:
         print(heroe["casa_comic"])
         break
 
-#h.información de Flash y Star-Lord
+#g.información de Flash y Star-Lord
 for heroe in super_heroes:
     if heroe["nombre"] == "Star-Lord":
         print("---------Info Star-Lord----------")
         print(heroe["nombre"], heroe["año_aparicion"], heroe["casa_comic"], heroe["biografia"])
         break
 
-#i.superhéroes que comienzan con la letra B, M y S
+#h.superhéroes que comienzan con la letra B, M y S
 print("---------Empiezan con B,S,M----------")
 for index, heroe in enumerate(super_heroes):
     if heroe['nombre'].startswith(('B', 'S', 'M')):
         print(index, heroe['nombre'])
+
+#i. Determinar cuantos superheroes hay en cada casa comic
+print("---------Cantidad de heroes por casa----------")
+contador_marvel = 0
+contador_dc = 0
+for heroe in super_heroes:
+    if heroe["casa_comic"] == "Marvel Comics":
+        contador_marvel += 1
+    else:
+        contador_dc += 1
+print ("Super heroes en marvel: ",contador_marvel)
+print("Super heroes en dc: ", contador_dc)

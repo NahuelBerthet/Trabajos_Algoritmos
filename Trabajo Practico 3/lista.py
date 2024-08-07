@@ -62,8 +62,9 @@
 def by_name(item):
     return item['nombre']
 
-def by_temp(item):
-    return item['temp']
+def by_tournament_wins(item):
+    return item['torneos_ganados']
+
 
 def by_hegiht(item):
     return item['altura']
