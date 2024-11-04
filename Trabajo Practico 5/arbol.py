@@ -1,19 +1,18 @@
 from cola import Queue
-
 class BinaryTree:
-
+    
     class __Node:
-        def __init__(self, value, left=None, right=None, other_value=None):
+        def __init__(self, value, other_value, left=None, right=None):
             self.value = value
+            self.other_value = other_value
             self.left = left
             self.right = right
-            self.other_value = other_value
 
     def __init__(self):
         self.root = None
 
-    def insert_node(self, value, other_value=None):
-        def __insert(root, value, other_value=None):
+    def insert_node(self, value, other_value):
+        def __insert(root, value, other_value):
             if root is None:
                 return BinaryTree.__Node(value, other_value=other_value)
             elif value < root.value:
@@ -28,16 +27,11 @@ class BinaryTree:
         def __search(root, key):
             if root is not None:
                 if root.value == key:
-                    # print('lo encontre')
                     return root
                 elif key < root.value:
-                    # print(f'buscalo a la izquierda de {root.value}')
                     return __search(root.left, key)
                 else:
-                    # print(f'buscalo a la derecha de {root.value}')
                     return __search(root.right, key)
-            # else:
-            #     print('no hay nada')
         aux = None
         if self.root is not None:
             aux = __search(self.root, key)
@@ -47,9 +41,7 @@ class BinaryTree:
         def __preorden(root):
             if root is not None:
                 print(root.value)
-                # print(f'izquierda de {root.value}')
                 __preorden(root.left)
-                # print(f'derecha de {root.value}')
                 __preorden(root.right)
 
         if self.root is not None:
@@ -110,25 +102,24 @@ class BinaryTree:
             __inorden_superheros_start_with(self.root, start)
 
     def by_level(self):
+        from queue import Queue
         pendientes = Queue()
         if self.root is not None:
-            pendientes.arrive(self.root)
+            pendientes.put(self.root)
 
-        while pendientes.size() > 0:
-            node = pendientes.attention()
+        while not pendientes.empty():
+            node = pendientes.get()
             print(node.value)
             if node.left is not None:
-                pendientes.arrive(node.left)
+                pendientes.put(node.left)
             if node.right is not None:
-                pendientes.arrive(node.right)
+                pendientes.put(node.right)
 
     def delete_node(self, value):
         def __replace(root):
             if root.right is None:
-                # print(f'no tiene derecha es el mayor {root.value}')
                 return root.left, root
             else:
-                # print('seguir buscando nodo par remplaz+ar a la dercha')
                 root.right, replace_node = __replace(root.right)
                 return root, replace_node
 
@@ -136,22 +127,16 @@ class BinaryTree:
             value_delete = None
             if root is not None:
                 if root.value > value:
-                    # print(f'buscar  a la izquierda de {root.value}')
                     root.left, value_delete = __delete(root.left, value)
                 elif root.value < value:
-                    # print(f'buscar  a la derecha de {root.value}')
                     root.right, value_delete = __delete(root.right, value)
                 else:
-                    # print('valor encontrado')
                     value_delete = root.value
                     if root.left is None:
-                        # print('a la izquierda no hay nada')
                         return root.right, value_delete
                     elif root.right is None:
-                        # print('a la derecha  no hay nada')
                         return root.left, value_delete
                     else:
-                        # print('tiene ambos hijos')
                         root.left, replace_node = __replace(root.left)
                         root.value = replace_node.value
                         return root, value_delete
@@ -159,6 +144,3 @@ class BinaryTree:
             return root, value_delete
 
         delete_value = None
-        if self.root is not None:
-            self.root, delete_value = __delete(self.root, value)
-        return delete_value

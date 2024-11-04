@@ -10,23 +10,38 @@
 # los villanos, luego resolver las siguiente tareas:
 # I. determinar cuántos nodos tiene cada árbol;
 # II. realizar un barrido ordenado alfabéticamente de cada árbol.
-from arbol import BinaryTree
-personajes = [
-    {'nombre': "Iron man", 'tipo': True},
-    {'nombre': "Carnage", 'tipo': False},
-    {'nombre': "Dr Strange", 'tipo': True},
-    {'nombre': "Captain America", 'tipo': True},
-    {'nombre': "Loki", 'tipo': False},
-    {'nombre': "Captain Marvel", 'tipo': True},
-    {'nombre': "Thanos", 'tipo': False},
+from arbol_avl import BinaryTree
+
+Personajes=[
+    {'nombre':'Captain America', 'villano':False},
+    {'nombre': 'Factor Strange','villano': False},
+    {'nombre': 'Iron Man','villano': False},
+    {'nombre': 'Thanos','villano': True},
+    {'nombre': 'Black Panther', 'villano':False},
+    {'nombre': 'Electro', 'villano':True},
+    {'nombre': 'Superman', 'villano':False},
+    {'nombre': 'Spider Man' , 'villano':False},
+    {'nombre': 'Ant Man', 'villano':False},
+    {'nombre': 'Black Adam', 'villano':True},
+    {'nombre': 'Trigon', 'villano':True},
+    {'nombre': 'Batman', 'villano':False},
+    {'nombre': 'Paralax', 'villano':True},
+    {'nombre': 'Ares', 'villano':True},
+
 ]
+
 tree = BinaryTree()
-for personaje in personajes:
-    is_hero = False if 'tipo' in personaje else True
+
+#Cargar con True o false si son villanos o heroes
+for personaje in Personajes:
+    is_hero = False if 'villano' in personaje else True
     personaje['is_hero'] = is_hero
     tree.insert_node(personaje['nombre'], personaje)
 
+# Mostrar los que comienzan con C
+tree.proximity_search('C')
 
-print(tree)
+# Contar personajes
 
-     
+cantidad = tree.contar_super_heroes()
+print
