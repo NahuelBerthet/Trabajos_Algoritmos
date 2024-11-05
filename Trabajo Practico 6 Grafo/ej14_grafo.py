@@ -73,6 +73,7 @@ print(f'Desde el router al SmartTV hay {peso_total} metros')
 # print(grafo.kruskal('cocina'))
 
 # Punto d: sumatoria de pesos(metros)
+grafo.mark_as_not_visited()
 new_grafo= grafo.kruskal('cocina')
 def calcular_peso_total(bosque):
     peso_total = 0
