@@ -121,7 +121,7 @@ class BinaryTree:
         def __contar_super_heroes(root):
             counter = 0
             if root is not None:
-                if root.other_value.get('is_hero') is True:
+                if root.other_value.get('villano') is True:
                     counter = 1
                 counter += __contar_super_heroes(root.left)
                 counter += __contar_super_heroes(root.right)
@@ -175,8 +175,19 @@ class BinaryTree:
         def __proximity_search(root, search_value):
             if root is not None:
                 __proximity_search(root.left, search_value)
-                if root.value.startswith(search_value):
+                if root.value.startswith(search_value) or search_value in root.value:
                     print(root.value)
+                __proximity_search(root.right, search_value)
+
+        if self.root is not None:
+            __proximity_search(self.root, search_value)
+
+    def proximity_search_all_info(self, search_value):
+        def __proximity_search(root, search_value):
+            if root is not None:
+                __proximity_search(root.left, search_value)
+                if root.value.startswith(search_value) :
+                    print(root.value, root.other_value)
                 __proximity_search(root.right, search_value)
 
         if self.root is not None:
@@ -240,4 +251,36 @@ class BinaryTree:
         if self.root is not None:
             self.root, delete_value, delete_extra_value = __delete(self.root, value)
         return delete_value, delete_extra_value
+
+
+    def criaturas_no_derrotadas(tree):
+        def __criaturas_derrotadas(root):
+            if root is not None:
+                if root.other_value.get('derrotado') == None:
+                    print(root.value)
+                __criaturas_derrotadas(root.left)
+                __criaturas_derrotadas(root.right)
+
+        __criaturas_derrotadas(tree.root)
+
+    def transferir_nodos(self, arbol_heroes, arbol_villanos):
+            def _transferir_nodos(root):
+                if root is not None:
+                    # Procesar el subárbol izquierdo
+                    _transferir_nodos(root.left)
+                    # Insertar el nodo en el árbol correspondiente
+                    if root.value==True:
+                        arbol_villanos.insert_node(root.value, root.other_value)
+                    else:
+                        arbol_heroes.insert_node(root.value, root.other_value)
+                    # Procesar el subárbol derecho
+                    _transferir_nodos(root.right)
+
+
+                
+
+            
+
+
+
 

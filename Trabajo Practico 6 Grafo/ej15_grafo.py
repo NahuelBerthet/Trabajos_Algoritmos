@@ -31,11 +31,7 @@ maravillas = [
 grafo = Graph(dirigido=False)
 
 for maravilla in maravillas:
-    nodo ={
-        'value': maravilla,
-        'aristas': [],
-    }
-    grafo.insert_vertice(maravilla)
+    grafo.insert_vertice(maravilla['nombre'],maravilla)
 
 
 distancias = [
@@ -55,8 +51,5 @@ distancias = [
     ["Parque Nacional de Komodo", "Río subterráneo de Puerto Princesa", 2000]
 ]
 
-for distancia, destino,peso in distancias:
-    grafo.insert_arista(distancia,destino,peso)
-
-
-grafo.show_graph()
+for origen, destino,peso in distancias:
+    grafo.insert_arista(origen,destino,peso)

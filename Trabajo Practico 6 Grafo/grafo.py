@@ -195,3 +195,17 @@ class Graph:
                         bosque.append(vertice_ori+';'+vertice_des+';'+f'{arista[1][0]}-{arista[1][1]}-{arista[0]}')
         return bosque
     
+    def get_paises_con_maravillas(self):
+        arquitectonicas = set()
+        naturales = set()
+        
+        for nodo in self.elements:
+            # Verificamos si la maravilla es arquitectónica o natural
+            if nodo['value']['other_value'] == 'arquitectonica':
+                arquitectonicas.update(nodo['value']['pais'])
+            elif nodo['value']['other_value'] == 'natural':
+                naturales.update(nodo['value']['pais'])
+        
+        # Encontrar la intersección de los dos conjuntos
+        paises_con_ambas = arquitectonicas.intersection(naturales)
+        return paises_con_ambas    
