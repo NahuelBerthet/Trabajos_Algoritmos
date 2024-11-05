@@ -34,6 +34,7 @@ class Graph:
         'value': value,
         'aristas': [],
         'visitado': False,
+        'other_value': other_value
         }
         self.elements.append(nodo)
 
@@ -195,17 +196,62 @@ class Graph:
                         bosque.append(vertice_ori+';'+vertice_des+';'+f'{arista[1][0]}-{arista[1][1]}-{arista[0]}')
         return bosque
     
-    def get_paises_con_maravillas(self):
+    def kruskal_por_tipo(self, tipo):
+            def buscar_en_bosque(bosque, buscado):
+                for index, arbol in enumerate(bosque):
+                    if buscado in arbol:
+                        return index
+
+            bosque = []
+            aristas = HeapMin()
+
+            for nodo in self.elements:
+                if nodo['other_value']['tipo'] == tipo:
+                    bosque.append([nodo['value']])
+                    for adjacente in nodo['aristas']:
+                        if self.elements[self.search(adjacente['value'])]['other_value']['tipo'] == tipo:
+                            aristas.arrive([nodo['value'], adjacente['value']], adjacente['peso'])
+
+            aux = []  
+
+            while len(bosque) > 1 and len(aristas.elements) > 0:
+                arista = aristas.atention()
+                origen = buscar_en_bosque(bosque, arista[1][0])
+                destino = buscar_en_bosque(bosque, arista[1][1])
+
+                if origen is not None and destino is not None and origen != destino:
+                    aux.append(arista)
+                    bosque[origen].extend(bosque.pop(destino))
+
+            return aux
+
+    def get_paises_con_ambas_maravillas(self):
         arquitectonicas = set()
         naturales = set()
-        
+
         for nodo in self.elements:
-            # Verificamos si la maravilla es arquitectónica o natural
-            if nodo['value']['other_value'] == 'arquitectonica':
-                arquitectonicas.update(nodo['value']['pais'])
-            elif nodo['value']['other_value'] == 'natural':
-                naturales.update(nodo['value']['pais'])
-        
-        # Encontrar la intersección de los dos conjuntos
+            tipo = nodo['other_value']['tipo']
+            paises = nodo['other_value']['pais']
+            if tipo == 'arquitectonica':
+                arquitectonicas.update(paises)
+            elif tipo == 'natural':
+                naturales.update(paises)
+
         paises_con_ambas = arquitectonicas.intersection(naturales)
-        return paises_con_ambas    
+        return paises_con_ambas
+    
+    def pais_con_multiples_maravillas_mismo_tipo(self):
+        maravillas_por_pais_y_tipo = {}
+
+        for nodo in self.elements:
+            tipo = nodo['other_value']['tipo']
+            paises = nodo['other_value']['pais']
+
+            for pais in paises:
+                if pais not in maravillas_por_pais_y_tipo:
+                    maravillas_por_pais_y_tipo[pais] = {'arquitectonica': 0, 'natural': 0}
+                maravillas_por_pais_y_tipo[pais][tipo] += 1
+
+        paises_multiples_maravillas = {pais for pais, tipos in maravillas_por_pais_y_tipo.items()
+            if tipos['arquitectonica'] > 1 or tipos['natural'] > 1}
+        return paises_multiples_maravillas

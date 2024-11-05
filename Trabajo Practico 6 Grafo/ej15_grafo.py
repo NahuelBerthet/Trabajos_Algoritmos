@@ -53,3 +53,17 @@ distancias = [
 
 for origen, destino,peso in distancias:
     grafo.insert_arista(origen,destino,peso)
+
+#Arbol expancion minimo
+print('\nExpancion minima por tipo arquitectonica')
+print(grafo.kruskal_por_tipo('arquitectonica'))
+print('\nPor tipo natural')
+print(grafo.kruskal_por_tipo('natural'))
+
+#Punto d
+print()
+print(grafo.get_paises_con_ambas_maravillas())
+
+#Punto e
+print()
+print(grafo.pais_con_multiples_maravillas_mismo_tipo())
